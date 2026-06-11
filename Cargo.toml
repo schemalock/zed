@@ -1,0 +1,15 @@
+[package]
+name = "schemalock-zed"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+zed_extension_api = "0.7.0"
+schemalock-zed-core = { path = "core" }
+
+[workspace]
+members = ["core"]
