@@ -34,7 +34,7 @@ impl SchemaLockExtension {
         let dir = format!("schemalock-{APP_VERSION}");
         let bin_path = format!("{dir}/{asset}");
 
-        if std::fs::metadata(&bin_path).map_or(false, |m| m.is_file()) {
+        if std::fs::metadata(&bin_path).is_ok_and(|m| m.is_file()) {
             return Ok(bin_path);
         }
 
@@ -57,6 +57,10 @@ impl SchemaLockExtension {
             zed::DownloadedFileType::Uncompressed,
         )?;
         zed::make_file_executable(&bin_path)?;
+        zed::set_language_server_installation_status(
+            id,
+            &zed::LanguageServerInstallationStatus::None,
+        );
 
         Ok(bin_path)
     }

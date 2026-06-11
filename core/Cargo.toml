@@ -3,3 +3,5 @@ name = "schemalock-zed-core"
 version = "0.1.0"
 edition = "2021"
 publish = false
+license = "Apache-2.0"
+description = "Platform to release-asset mapping for the SchemaLock Zed extension"
