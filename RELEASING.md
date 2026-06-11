@@ -12,7 +12,8 @@ they must always match.
    `gh release view -R schemalock/app <tag> --json assets -q '.assets[].name'`
 2. Update `.app-version` and `const APP_VERSION` in `src/lib.rs` to the new tag.
 3. Bump `version` in both `extension.toml` and `Cargo.toml`.
-4. `cargo build --release --target wasm32-wasip1` to confirm it still compiles.
+4. `cargo build --release --target wasm32-wasip2` to confirm it still compiles
+   (Zed builds extensions for `wasm32-wasip2`).
 5. Branch + merge (never commit directly to the default branch) + tag the
    extension at the new version.
 

@@ -42,10 +42,12 @@ settings:
 ## Development
 
 ```bash
-rustup target add wasm32-wasip1
-cargo build --release --target wasm32-wasip1   # verify it compiles
-cargo test -p schemalock-zed-core              # run unit tests
+rustup target add wasm32-wasip2                 # the target Zed compiles extensions for
+cargo build --release --target wasm32-wasip2    # verify it compiles
+cargo test -p schemalock-zed-core               # run unit tests
 ```
 
 Then in Zed: command palette → **zed: install dev extension** → select this
-directory.
+directory. Zed builds the extension itself for `wasm32-wasip2` using a
+`rustup`-managed toolchain, so that target must be installed (the command above
+adds it).
