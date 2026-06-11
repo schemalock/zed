@@ -10,16 +10,16 @@ a `schemalock.yaml`, owned resources (e.g. a VMCluster) get completion, hover, a
 diagnostics from the schema pinned by the nearest `schemalock.yaml`. Unowned YAML
 is transparently proxied to `yaml-language-server`.
 
-This is a thin client. The actual language server is the `schemalock` binary from
-[`schemalock/app`](https://github.com/schemalock/app); the extension downloads the
-pinned release (currently `v0.3.2`) for your platform on first use and caches it.
+This is a thin client. The actual language server is the `schemalock` binary; the
+extension downloads the pinned per-platform build (currently `v0.3.2`) from the
+public SchemaLock CDN (`cdn.schemalock.dev/bin/<tag>/`) on first use and caches it.
 
 > **Not available:** the schema-version status-bar picker shipped in the VS Code
 > and JetBrains clients is not present here — Zed extensions have no custom-UI API.
 
 ## Requirements
 
-- Network access on first use (to download the binary from GitHub releases).
+- Network access on first use (to download the binary from `cdn.schemalock.dev`).
 - A supported platform: macOS (arm64/x64), Linux (arm64/x64), Windows (x64).
 
 ## YAML language-server coexistence

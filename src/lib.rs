@@ -1,6 +1,6 @@
 //! SchemaLock Zed extension: registers `schemalock serve --stdio` as the YAML
-//! language server, downloading the pinned per-platform binary from the
-//! `schemalock/app` GitHub releases on first use.
+//! language server, downloading the pinned per-platform binary from the public
+//! SchemaLock CDN on first use.
 
 use zed_extension_api::{self as zed, LanguageServerId, Result};
 
@@ -10,8 +10,11 @@ use zed_extension_api::{self as zed, LanguageServerId, Result};
 /// download, because the WASM sandbox cannot read repo files at runtime).
 const APP_VERSION: &str = "v0.3.2";
 
-/// The GitHub repository that publishes the `schemalock` binaries.
-const APP_REPO: &str = "schemalock/app";
+/// Public CDN prefix under which the per-tag binaries are published. The full
+/// asset URL is `<CDN_BASE>/<APP_VERSION>/<asset>`. We download straight from the
+/// CDN (not the GitHub API) because `schemalock/app` is a private repository —
+/// only the binaries are public.
+const CDN_BASE: &str = "https://cdn.schemalock.dev/bin";
 
 struct SchemaLockExtension;
 
@@ -43,19 +46,8 @@ impl SchemaLockExtension {
             &zed::LanguageServerInstallationStatus::Downloading,
         );
 
-        let release = zed::github_release_by_tag_name(APP_REPO, APP_VERSION)?;
-        let download_url = release
-            .assets
-            .iter()
-            .find(|a| a.name == asset)
-            .map(|a| a.download_url.clone())
-            .ok_or_else(|| format!("release {APP_VERSION} has no asset {asset}"))?;
-
-        zed::download_file(
-            &download_url,
-            &bin_path,
-            zed::DownloadedFileType::Uncompressed,
-        )?;
+        let url = format!("{CDN_BASE}/{APP_VERSION}/{asset}");
+        zed::download_file(&url, &bin_path, zed::DownloadedFileType::Uncompressed)?;
         zed::make_file_executable(&bin_path)?;
         zed::set_language_server_installation_status(
             id,
