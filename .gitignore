@@ -2,3 +2,4 @@
 /core/target
 *.wasm
 /core/Cargo.lock
+/.claude/
