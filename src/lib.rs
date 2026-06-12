@@ -4,7 +4,7 @@
 
 use zed_extension_api::{self as zed, LanguageServerId, Result};
 
-/// The pinned `schemalock/app` release tag whose binary this extension version
+/// The pinned `schemalock/schemalock` release tag whose binary this extension version
 /// ships against. Keep in lockstep with the `.app-version` file (the file is the
 /// human-facing source of truth; this const is what actually drives the
 /// download, because the WASM sandbox cannot read repo files at runtime).
@@ -12,8 +12,8 @@ const APP_VERSION: &str = "v0.3.2";
 
 /// Public CDN prefix under which the per-tag binaries are published. The full
 /// asset URL is `<CDN_BASE>/<APP_VERSION>/<asset>`. We download straight from the
-/// CDN (not the GitHub API) because `schemalock/app` is a private repository —
-/// only the binaries are public.
+/// CDN (not the GitHub API): the binaries are published to the CDN by the app
+/// release pipeline, and the WASM sandbox has no GitHub API credentials.
 const CDN_BASE: &str = "https://cdn.schemalock.dev/bin";
 
 struct SchemaLockExtension;

@@ -15,7 +15,7 @@ pub struct Platform {
 /// Returns the GitHub release asset name for `platform`, or `None` if SchemaLock
 /// publishes no prebuilt binary for that os/arch combination.
 ///
-/// Asset names are the exact `schemalock/app` release asset filenames.
+/// Asset names are the exact `schemalock/schemalock` release asset filenames.
 pub fn asset_name(platform: &Platform) -> Option<&'static str> {
     match (platform.os, platform.arch) {
         ("mac", "aarch64") => Some("schemalock-darwin-arm64"),
