@@ -1,12 +1,12 @@
 # Releasing the SchemaLock Zed extension
 
-The extension versions independently of `schemalock/app`. `.app-version` and the
+The extension versions independently of `schemalock/schemalock`. `.app-version` and the
 `APP_VERSION` const in `src/lib.rs` pin which app tag the extension downloads;
 they must always match.
 
-> **Why the CDN, not GitHub releases?** `schemalock/app` is a **private** repo, so
-> Zed's anonymous GitHub API calls 404. The extension instead downloads from the
-> public CDN at `https://cdn.schemalock.dev/bin/<tag>/<asset>`. Publishing those
+> **Why the CDN, not GitHub releases?** The binaries are published to the CDN by
+> the app release pipeline, and the WASM sandbox has no GitHub API credentials. The
+> extension downloads from the public CDN at `https://cdn.schemalock.dev/bin/<tag>/<asset>`. Publishing those
 > objects is part of the app release (see "Publishing binaries to the CDN" below).
 
 ## Bumping the pinned app version
@@ -27,7 +27,7 @@ they must always match.
 5. Branch + merge (never commit directly to the default branch) + tag the
    extension at the new version.
 
-> Schema/protocol changes in `schemalock/app` are contract-breaking. Ship the app
+> Schema/protocol changes in `schemalock/schemalock` are contract-breaking. Ship the app
 > bump and the extension bump in lockstep so `.app-version` always points at a
 > compatible app.
 
