@@ -1,5 +1,7 @@
 # SchemaLock for Zed
 
+[![CI](https://github.com/schemalock/zed/actions/workflows/ci.yml/badge.svg)](https://github.com/schemalock/zed/actions/workflows/ci.yml)
+
 Schema-pinned validation, completion, and hover for Kubernetes-style YAML in the
 [Zed](https://zed.dev) editor, backed by the SchemaLock CDN.
 
