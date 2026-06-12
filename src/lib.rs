@@ -46,6 +46,10 @@ impl SchemaLockExtension {
             &zed::LanguageServerInstallationStatus::Downloading,
         );
 
+        // `download_file` does not create parent directories, so make the
+        // version dir before writing the binary into it.
+        std::fs::create_dir_all(&dir).map_err(|e| format!("creating {dir}: {e}"))?;
+
         let url = format!("{CDN_BASE}/{APP_VERSION}/{asset}");
         zed::download_file(&url, &bin_path, zed::DownloadedFileType::Uncompressed)?;
         zed::make_file_executable(&bin_path)?;
